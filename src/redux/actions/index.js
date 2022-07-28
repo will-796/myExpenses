@@ -1,6 +1,6 @@
 // Coloque aqui suas actions
 
-import { ADD_EXPENSE, GET_CURRENCY, USER_LOGIN } from './actionTypes';
+import { ADD_EXPENSE, DELETE_EXPENSE, GET_CURRENCY, USER_LOGIN } from './actionTypes';
 
 export const userLogin = (email) => ({
   type: USER_LOGIN,
@@ -17,4 +17,13 @@ export const actionAddExpense = (expense) => async (dispatch) => {
   const data = await response.json();
   console.log(expense);
   dispatch({ type: ADD_EXPENSE, expense, data });
+};
+
+export const actionDeleteExpense = (id) => {
+  const obj = {
+    type: DELETE_EXPENSE,
+    id,
+  };
+  console.log(obj);
+  return obj;
 };
