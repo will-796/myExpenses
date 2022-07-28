@@ -1,24 +1,31 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actionGetCurrency } from '../redux/actions';
+import { actionAddExpense, actionGetCurrency } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
     super();
-    this.state = {
+    this.initialState = {
       value: '',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
     };
+    this.state = this.initialState;
   }
 
   componentDidMount() {
     const { getCurrency } = this.props;
     getCurrency();
   }
+
+  handleClick = () => {
+    const { addExpense } = this.props;
+    addExpense(this.state);
+    this.setState(this.initialState);
+  };
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -104,6 +111,9 @@ class WalletForm extends Component {
             ))}
           </select>
         </label>
+        <button type="button" onClick={ this.handleClick }>
+          Adicionar despesa
+        </button>
       </form>
     );
   }
@@ -112,6 +122,7 @@ class WalletForm extends Component {
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   getCurrency: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -119,6 +130,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   getCurrency: () => dispatch(actionGetCurrency()),
+  addExpense: (expense) => dispatch(actionAddExpense(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
