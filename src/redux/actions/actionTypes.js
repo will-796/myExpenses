@@ -1,3 +1,3 @@
 export const USER_LOGIN = 'USER_LOGIN';
-export const type2 = 'type2';
+export const GET_CURRENCY = 'GET_CURRENCY';
 export const type3 = 'type3';

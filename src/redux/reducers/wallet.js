@@ -1,13 +1,13 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 
-import { USER_LOGIN } from '../actions/actionTypes';
+import { GET_CURRENCY } from '../actions/actionTypes';
 
-const INITIAL_STATE = { };
+const INITIAL_STATE = { currencies: [] };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case USER_LOGIN:
-    return { ...state, algumaChave: action.payload };
+  case GET_CURRENCY:
+    return { ...state, currencies: action.currency };
 
   default:
     return state;

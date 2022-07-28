@@ -2,7 +2,7 @@
 
 import { USER_LOGIN } from '../actions/actionTypes';
 
-const INITIAL_STATE = { };
+const INITIAL_STATE = { email: 'user' };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
