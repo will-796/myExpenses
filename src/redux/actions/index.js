@@ -1,6 +1,13 @@
 // Coloque aqui suas actions
 
-import { ADD_EXPENSE, DELETE_EXPENSE, GET_CURRENCY, USER_LOGIN } from './actionTypes';
+import {
+  ADD_EXPENSE,
+  DELETE_EXPENSE,
+  GET_CURRENCY,
+  ID_TO_EDIT,
+  UPDATE_EXPENSE,
+  USER_LOGIN,
+} from './actionTypes';
 
 export const userLogin = (email) => ({
   type: USER_LOGIN,
@@ -15,15 +22,20 @@ export const actionGetCurrency = () => async (dispatch) => {
 export const actionAddExpense = (expense) => async (dispatch) => {
   const response = await fetch('https://economia.awesomeapi.com.br/json/all');
   const data = await response.json();
-  console.log(expense);
   dispatch({ type: ADD_EXPENSE, expense, data });
 };
 
-export const actionDeleteExpense = (id) => {
-  const obj = {
-    type: DELETE_EXPENSE,
-    id,
-  };
-  console.log(obj);
-  return obj;
-};
+export const actionDeleteExpense = (id) => ({
+  type: DELETE_EXPENSE,
+  id,
+});
+
+export const setIdToEdit = (id) => ({
+  type: ID_TO_EDIT,
+  id,
+});
+
+export const actionUpdateExpense = (expenses) => ({
+  type: UPDATE_EXPENSE,
+  expenses,
+});

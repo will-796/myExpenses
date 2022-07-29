@@ -4,17 +4,23 @@ import {
   ADD_EXPENSE,
   DELETE_EXPENSE,
   GET_CURRENCY,
+  ID_TO_EDIT,
+  UPDATE_EXPENSE,
 } from '../actions/actionTypes';
 
-const INITIAL_STATE = { currencies: [], expenses: [], numberExpenses: 0 };
+const INITIAL_STATE = {
+  currencies: [],
+  expenses: [],
+  numberExpenses: 0,
+  editor: false,
+  idToEdit: null,
+};
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case GET_CURRENCY:
-    console.log('merda');
     return { ...state, currencies: action.currency };
   case ADD_EXPENSE:
-    console.log('passei aqui');
     return {
       ...state,
       expenses: [
@@ -29,13 +35,23 @@ const reducer = (state = INITIAL_STATE, action) => {
     };
 
   case DELETE_EXPENSE:
-    console.log('passei aqui corno');
     return {
       ...state,
       expenses: [...state.expenses].filter(
         (expense) => expense.id !== action.id,
       ),
     };
+
+  case UPDATE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...action.expenses],
+      editor: false,
+      idToEdit: null,
+    };
+
+  case ID_TO_EDIT:
+    return { ...state, idToEdit: action.id, editor: true };
 
   default:
     return state;
